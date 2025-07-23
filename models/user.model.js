@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
       select: false, // optional: prevent password from showing in queries by default
     },
   },
-  { Timestamp: true }
+  { timestamps: true }
 );
 const User = mongoose.model("User", userSchema);
 export default User;
