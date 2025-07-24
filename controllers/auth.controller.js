@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 //Useful for financial, user-auth, or multi-model operations
 //Requires MongoDB replica set (even if it's a single-node dev replica set)
 
-export const signUp = async (req, res, next) => {
+export const signUp = async (req, res, next) => {   
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
@@ -63,7 +63,7 @@ export const signIn = async (req, res, next) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email }).select("+password");
-    
+
     if (!user) {
       const error = new Error("Invalid email or password.");
       error.statusCode = 404;
