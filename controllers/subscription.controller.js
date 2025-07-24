@@ -34,3 +34,11 @@ export const getUserSubscription = async (req, res, next) => {
   }
 };
 
+export const allSubscription = async (req, res, next) => {
+  try {
+    const allSubscription = await Subscription.find();
+    res.status(200).json({ success: true, data: allSubscription });
+  } catch (error) {
+    next(error);
+  }
+};

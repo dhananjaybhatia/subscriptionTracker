@@ -3,6 +3,7 @@ import authorize from "../middlewares/auth.middleware.js";
 import {
   createSubscription,
   getUserSubscription,
+  allSubscription,
 } from "../controllers/subscription.controller.js";
 
 const subscriptionRouter = Router();
@@ -13,8 +14,8 @@ subscriptionRouter.post("/", authorize, createSubscription);
 // GET User subscription (requires user to be authenticated)
 subscriptionRouter.get("/user/:id", authorize, getUserSubscription);
 
-// GET all subscriptions (you can implement DB logic later)
-subscriptionRouter.get("/", (req, res) => res.send({ title: "Get all Subs" }));
+// GET all subscriptions (no authorise user is required. Anyone can see all plans)
+subscriptionRouter.get("/", allSubscription);
 
 // GET subs details
 subscriptionRouter.get("/:id", (req, res) =>
@@ -34,7 +35,5 @@ subscriptionRouter.put("/:id/cancel", (req, res) => ({ title: "Cancel Subs" }));
 subscriptionRouter.get("/upcoming-renewals", (req, res) => ({
   title: "Get upciming renewals",
 }));
-
-
 
 export default subscriptionRouter;
