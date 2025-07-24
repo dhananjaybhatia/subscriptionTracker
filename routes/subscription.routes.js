@@ -4,6 +4,7 @@ import {
   createSubscription,
   getUserSubscription,
   allSubscription,
+  getSubscriptionDetails,
 } from "../controllers/subscription.controller.js";
 
 const subscriptionRouter = Router();
@@ -17,10 +18,8 @@ subscriptionRouter.get("/user/:id", authorize, getUserSubscription);
 // GET all subscriptions (no authorise user is required. Anyone can see all plans)
 subscriptionRouter.get("/", allSubscription);
 
-// GET subs details
-subscriptionRouter.get("/:id", (req, res) =>
-  res.send({ title: "Get subs details" })
-);
+// GET subscription details by subscription ID (for viewing one specific subscription)
+subscriptionRouter.get("/:id", getSubscriptionDetails);
 
 // Update Subs
 subscriptionRouter.put("/:id", (req, res) => ({ title: "Update Subs" }));
