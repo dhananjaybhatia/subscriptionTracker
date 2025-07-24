@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 
 //steps are - someone is making a request getUser details -> authorize middle -> verify -> next -> get details.
 
- const authorize = async (req, res, next) => {
+const authorize = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -27,7 +27,7 @@ import User from "../models/user.model.js";
         .json({ success: false, message: "Unauthorized: User not found" });
     }
 
-    req.user = user; // ✅ Attach user to request.
+    req.user = user; // Attach user to request.
     next();
   } catch (error) {
     return res.status(401).json({
