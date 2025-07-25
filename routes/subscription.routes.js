@@ -5,6 +5,8 @@ import {
   getUserSubscription,
   allSubscription,
   getSubscriptionDetails,
+  updateSubscriptionById,
+  cancelSubscription,
 } from "../controllers/subscription.controller.js";
 
 const subscriptionRouter = Router();
@@ -21,14 +23,14 @@ subscriptionRouter.get("/", allSubscription);
 // GET subscription details by subscription ID (for viewing one specific subscription)
 subscriptionRouter.get("/:id", getSubscriptionDetails);
 
-// Update Subs
-subscriptionRouter.put("/:id", (req, res) => ({ title: "Update Subs" }));
+// Updates a specific subscription by ID (e.g., change price, status, or payment method).
+subscriptionRouter.put("/:id", authorize, updateSubscriptionById);
 
 // Delete Subs
 subscriptionRouter.delete("/:id", (req, res) => ({ title: "Delete Subs" }));
 
-// Cancel subs
-subscriptionRouter.put("/:id/cancel", (req, res) => ({ title: "Cancel Subs" }));
+// Cancel selected subscription
+subscriptionRouter.put("/:id/cancel", authorize, cancelSubscription);
 
 //upcoming renewals
 subscriptionRouter.get("/upcoming-renewals", (req, res) => ({
